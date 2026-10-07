@@ -43,7 +43,7 @@ h3 {
   margin-bottom: 0;
 }
 
-/*Lista de Ideias*/
+/* Lista de Ideias */
 
 .lista-ideias {
   margin-top: 20px;
@@ -73,7 +73,7 @@ h3 {
   text-decoration: line-through;
 }
 
-/*Botões*/
+/* Botões */
 
 .botao-limpar {
   margin-top: 15px;
@@ -88,7 +88,7 @@ h3 {
   background-color: #eee;
 }
 .botao-adicionar {
-  padding: 10px 15px; /*10 - espaço em cima e em baixo. 15 - espaço dos lados*/
+  padding: 10px 15px; /* 10px cima/baixo e 15px nos lados */
   border: none;
   border-radius: 5px;
   background-color: #333;
@@ -113,7 +113,7 @@ h3 {
   color: red;
 }
 
-/*Rodapé*/
+/* Rodapé */
 
 .rodape {
   position: fixed;

@@ -1,17 +1,20 @@
 import { useState } from "react";
 
 export default function App() {
+  // Estados da aplicação:
   const [ideias, setIdeias] = useState([]);
   const [novaIdeia, setNovaIdeia] = useState("");
   const [erro, setErro] = useState("");
 
   function enviarIdeia(event){
+    // Impede que o formulário recarregue a página.
     event.preventDefault();
     
+    // Verifica se o usuário digitou apenas espaços ou deixou o campo vazio.
     if (novaIdeia.trim() === "") {
       setErro("Digite sua ideia antes de adicionar.");
       return;
-    };
+    }
 
     const ideia = {
       id: Date.now(),
@@ -20,14 +23,17 @@ export default function App() {
       data: new Date().toLocaleDateString("pt-BR")
     };
 
+    // Adiciona a nova ideia à lista sem alterar diretamente o estado anterior.
     setIdeias((listaAtual) => [...listaAtual, ideia]);
 
     console.log(`Nova ideia criada: ${novaIdeia}`);
 
+    // Limpa o campo e a mensagem de erro após adicionar uma nova ideia.
     setNovaIdeia("");
     setErro("");
   }
 
+  // Troca o atributo "feita" entre true e false por meio do operador !.
   function alternarEstadoIdeia(id) {
     setIdeias((listaAtual) => listaAtual.map((ideia) => 
       ideia.id === id ? { ...ideia, feita: !ideia.feita } : ideia)
@@ -49,6 +55,7 @@ export default function App() {
 
   let caracteresRestantes = 80 - novaIdeia.length;
 
+  // Evita mostrar valores negativos no contador.
   if (caracteresRestantes < 0) {
     caracteresRestantes = 0;
   }
@@ -71,13 +78,15 @@ export default function App() {
 
         <p>{caracteresRestantes} caracteres restantes</p>
       </form>
-
+      
+      {/* A mensagem só aparece quando erro possui algum texto. */}
       {erro && <p className="mensagem-erro">{erro}</p>}
 
       <button type="button" onClick={limparTudo} className="botao-limpar">Limpar tudo</button>
 
       <div className="lista-ideias">
         {ideias.map((ideia) => (
+          // O id é utilizado como key para identificar cada item da lista.
           <div key={ideia.id} className="ideia">
             <input 
               type="checkbox"
@@ -85,6 +94,7 @@ export default function App() {
               onChange={() => alternarEstadoIdeia(ideia.id)}
             />
 
+            {/* A classe "feita" aplica o risco no texto quando concluída. */}
             <span className={ideia.feita ? "feita" : ""}>{ideia.texto}</span>
             <span className="data">{ideia.data}</span>
 
