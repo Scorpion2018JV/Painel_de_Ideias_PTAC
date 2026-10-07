@@ -12,9 +12,35 @@ export default function App() {
       setErro("Digite sua ideia antes de adicionar.");
       return;
     }
-    console.log("Nova ideia criada.")
-    console.log(novaIdeia)
-  }
+
+    const ideia = {
+      id: Date.now(),
+      texto: novaIdeia,
+      feita: false
+    };
+
+    setIdeias((listaAtual) => [...listaAtual, ideia]);
+
+    console.log(`Nova ideia criada: ${novaIdeia}`);
+
+    setNovaIdeia("");
+    setErro("");
+  };
+
+  function aoAlternarCheckbox(id) {
+    setIdeias((atual) =>
+      atual.map((ideia) => {
+        if (ideia.id === id) {
+          return {
+            ...ideia,
+            feita: !ideia.feita
+          };
+        }
+
+        return ideia;
+      })
+    );
+  };
 
   return (
     <>
@@ -29,9 +55,24 @@ export default function App() {
             setErro("");
           }} 
         />
-        <button>Adicionar</button>
+        <button type="submit">Adicionar</button>
       </form>
+
       {erro && <p style={{ color: "red" }}>{erro}</p>}
+
+      <div>
+        {ideias.map((ideia) => (
+          <div key={ideia.id}>
+            <input 
+            type="checkbox"
+            checked={ideia.feita}
+            onChange={() => aoAlternarCheckbox(ideia.id)}
+            />
+            <span>{ideia.texto}</span>
+            <button type="button">✕</button>
+          </div>
+        ))}
+      </div>
     </>
   );
-}
+};
