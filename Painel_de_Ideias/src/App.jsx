@@ -16,7 +16,8 @@ export default function App() {
     const ideia = {
       id: Date.now(),
       texto: novaIdeia.trim(),
-      feita: false
+      feita: false,
+      data: new Date().toLocaleDateString("pt-BR")
     };
 
     setIdeias((listaAtual) => [...listaAtual, ideia]);
@@ -39,8 +40,18 @@ export default function App() {
     });
   }
 
+  function limparTudo() {
+    setIdeias([]);
+  }
+
   const ideiasConcluidas = ideias.filter((ideia) => ideia.feita).length;
   const fraseContador = `${ideias.length} ideia(s) no painel · ${ideiasConcluidas} concluída(s)`;
+
+  let caracteresRestantes = 80 - novaIdeia.length;
+
+  if (caracteresRestantes < 0) {
+    caracteresRestantes = 0;
+  }
 
   return (
     <>
@@ -48,28 +59,33 @@ export default function App() {
       <h3>Registre aqui suas ideias!</h3>
       <form onSubmit={enviarIdeia}>
         <input 
-          type="text"
-          placeholder="Digite sua ideia" 
-          value={novaIdeia} 
-          onChange={(event) => {
-            setNovaIdeia(event.target.value); 
-            setErro("");
-          }}
+            type="text"
+            placeholder="Digite sua ideia"
+            value={novaIdeia} 
+            onChange={(event) => {
+              setNovaIdeia(event.target.value); 
+              setErro("");
+            }}
         />
-        <button type="submit">Adicionar</button>
+        <button type="submit" disabled={novaIdeia.length > 80}>Adicionar</button>
+
+        <p>{caracteresRestantes} caracteres restantes</p>
       </form>
 
       {erro && <p style={{ color: "red" }}>{erro}</p>}
+
+      <button type="button" onClick={limparTudo}>Limpar tudo</button>
 
       <div>
         {ideias.map((ideia) => (
           <div key={ideia.id}>
             <input 
-            type="checkbox"
-            checked={ideia.feita}
-            onChange={() => aoAlternarCheckbox(ideia.id)}
+              type="checkbox"
+              checked={ideia.feita}
+              onChange={() => aoAlternarCheckbox(ideia.id)}
             />
             <span className={ideia.feita ? "feita" : ""}>{ideia.texto}</span>
+            <span> - {ideia.data}</span>
             <button type="button" onClick={() => removerIdeia(ideia.id)}>✕</button>
           </div>
         ))}
