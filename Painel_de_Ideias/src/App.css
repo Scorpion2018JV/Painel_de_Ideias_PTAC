@@ -1,3 +1,125 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: white;
+  color: black;
+  padding: 15px;
+  padding-bottom: 50px;
+}
+
+/* Título */
+
+h1 {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+h3 {
+  text-align: center;
+  margin-top: 0;
+  color: #555555;
+  font-weight: normal;
+}
+
+/* Formulário */
+
+.formulario {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.formulario input {
+  flex: 1; /*Ocupa o tamanho disponível*/
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.mensagem-erro {
+  color: red;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+/*Lista de Ideias*/
+
+.lista-ideias {
+  margin-top: 20px;
+}
+
+.ideia {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  margin-bottom: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.ideia:hover {
+  background-color: #f7f7f7;
+}
+
+.data {
+  font-size: 13px;
+  color: #777;
+  margin-left: auto;
+}
+
 .feita {
   text-decoration: line-through;
+}
+
+/*Botões*/
+
+.botao-limpar {
+  margin-top: 15px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.botao-limpar:hover {
+  background-color: #eee;
+}
+.botao-adicionar {
+  padding: 10px 15px; /*10 - espaço em cima e em baixo. 15 - espaço dos lados*/
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+}
+
+.botao-adicionar:hover {
+  background-color: #555;
+}
+
+.botao-adicionar:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.botao-remover {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  color: red;
+}
+
+/*Rodapé*/
+
+.rodape {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background-color: white;
+  border-top: 1px solid #ddd;
 }

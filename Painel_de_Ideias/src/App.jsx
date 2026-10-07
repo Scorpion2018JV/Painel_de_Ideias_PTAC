@@ -28,7 +28,7 @@ export default function App() {
     setErro("");
   }
 
-  function aoAlternarCheckbox(id) {
+  function alternarEstadoIdeia(id) {
     setIdeias((listaAtual) => listaAtual.map((ideia) => 
       ideia.id === id ? { ...ideia, feita: !ideia.feita } : ideia)
     );
@@ -57,7 +57,7 @@ export default function App() {
     <>
       <h1>Painel de Ideias</h1>
       <h3>Registre aqui suas ideias!</h3>
-      <form onSubmit={enviarIdeia}>
+      <form onSubmit={enviarIdeia} className="formulario">
         <input 
             type="text"
             placeholder="Digite sua ideia"
@@ -67,31 +67,33 @@ export default function App() {
               setErro("");
             }}
         />
-        <button type="submit" disabled={novaIdeia.length > 80}>Adicionar</button>
+        <button type="submit" disabled={novaIdeia.length > 80} className="botao-adicionar">Adicionar</button>
 
         <p>{caracteresRestantes} caracteres restantes</p>
       </form>
 
-      {erro && <p style={{ color: "red" }}>{erro}</p>}
+      {erro && <p className="mensagem-erro">{erro}</p>}
 
-      <button type="button" onClick={limparTudo}>Limpar tudo</button>
+      <button type="button" onClick={limparTudo} className="botao-limpar">Limpar tudo</button>
 
-      <div>
+      <div className="lista-ideias">
         {ideias.map((ideia) => (
-          <div key={ideia.id}>
+          <div key={ideia.id} className="ideia">
             <input 
               type="checkbox"
               checked={ideia.feita}
-              onChange={() => aoAlternarCheckbox(ideia.id)}
+              onChange={() => alternarEstadoIdeia(ideia.id)}
             />
+
             <span className={ideia.feita ? "feita" : ""}>{ideia.texto}</span>
-            <span> - {ideia.data}</span>
-            <button type="button" onClick={() => removerIdeia(ideia.id)}>✕</button>
+            <span className="data">{ideia.data}</span>
+
+            <button type="button" onClick={() => removerIdeia(ideia.id)} className="botao-remover">✕</button>
           </div>
         ))}
       </div>
 
-      <footer>
+      <footer className="rodape">
         <p>{fraseContador}</p>
       </footer>
     </>
